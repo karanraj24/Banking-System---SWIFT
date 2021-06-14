@@ -1,0 +1,785 @@
+/**
+
+                            Online Swift Compiler.
+                Code, Compile, Run and Debug Swift script online.
+Write your code in this editor and press "Run" button to execute it.
+
+*/
+
+
+import Foundation
+
+//create class for which contains all Customer Details
+class Account{
+    
+    var Account_Number : Int
+    var Account_Holder_Name : String
+    var Account_Holder_Id : String
+    var Account_Type : String
+    var Account_Initial_Balance : Double
+    var Account_Holder_City : String
+    var Account_Holder_Gender : String
+    
+    init(Account_Number : Int, Account_Holder_Name : String, Account_Holder_Id : String ,Account_Type : String, Account_Initial_Balance : Double, Account_Holder_City : String, Account_Holder_Gender : String)
+    {
+        self.Account_Number = Account_Number
+        self.Account_Holder_Name = Account_Holder_Name
+        self.Account_Holder_Id = Account_Holder_Id
+        self.Account_Type = Account_Type
+        self.Account_Initial_Balance = Account_Initial_Balance
+        self.Account_Holder_City = Account_Holder_City
+        self.Account_Holder_Gender = Account_Holder_Gender
+    }
+    
+    //function to print all Customer Details
+    func printDetails()
+    {
+        print("\n\(self.Account_Number) | \(self.Account_Holder_Name) | \(self.Account_Holder_Id) |\(self.Account_Type) | \(self.Account_Initial_Balance) | \(self.Account_Holder_City) | \(self.Account_Holder_Gender)")
+    }
+}
+
+//function to check whether entered Account Number is available or not
+func AccountBalance(requiredno : Int, accountdetails : [Account]) -> Bool
+{
+    for accno in accountdetails
+    {
+        if requiredno == accno.Account_Number
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to get Account balance of Customer by entering Account Number
+func getAccountBalance(requiredno : Int, accountdetails : [Account]) -> Double
+{
+    var balance = 0.0
+    for accno in accountdetails
+    {
+        if requiredno == accno.Account_Number
+        {
+            balance = accno.Account_Initial_Balance
+        }
+    }
+    return balance
+}
+
+//function to change Account balance after Customer Deposite amount succesfully
+func DepositeAmount(requiredno : Int, requiredamount : Double, accountdetails : [Account])
+{
+    for amount in accountdetails
+    {
+        if requiredno == amount.Account_Number
+        {
+            amount.Account_Initial_Balance = amount.Account_Initial_Balance + requiredamount
+        }
+    }
+}
+
+//function to check whether entered amount is less than Initial balance or not
+func checkWithdrawAmount(requiredno : Int, requiredamount : Double, accountdetails : [Account]) -> Bool
+{
+    for amount in accountdetails
+    {
+        if requiredno == amount.Account_Number && requiredamount < amount.Account_Initial_Balance
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to change Account balance after Customer Withdraw the amount
+func WithdrawAmount(requiredno : Int, requiredamount : Double, accountdetails : [Account])
+{
+    for amount in accountdetails
+    {
+        if requiredno == amount.Account_Number && requiredamount < amount.Account_Initial_Balance
+        {
+            amount.Account_Initial_Balance = amount.Account_Initial_Balance - requiredamount
+        }
+    }
+}
+
+//function which returns index of the array to close an Account
+func returnCount(requiredno : Int, accountdetails : [Account]) -> Int
+{
+    var count = 0
+    for acccount in accountdetails
+    {
+        if requiredno == acccount.Account_Number
+        {
+            count = count + 1
+            break
+        }
+        else
+        {
+            count = count + 1
+        }
+    }
+    return count
+}
+
+//function to change the name 
+func NewName(requiredno : Int, requiredname : String, accountdetails : [Account])
+{
+    for accnewname in accountdetails
+    {
+        if requiredno == accnewname.Account_Number
+        {
+            accnewname.Account_Holder_Name = requiredname
+        }
+    }
+}
+
+//function to change the city
+func NewCity(requiredno : Int, requiredname : String, accountdetails : [Account])
+{
+    for accnewcity in accountdetails
+    {
+        if requiredno == accnewcity.Account_Number
+        {
+            accnewcity.Account_Holder_City = requiredname
+        }
+    }
+}
+
+//function which deduct money from one Account after Transfer 
+func TransferMoneyyour(requiredyourno : Int, requiredmoney : Double, accountdetails : [Account])
+{
+    for money in accountdetails
+    {
+        if requiredyourno == money.Account_Number
+        {
+            money.Account_Initial_Balance = money.Account_Initial_Balance - requiredmoney
+        }
+    }
+}
+
+//function which add money to other Account after Transfer
+func TransferMoneyother(requiredyourno : Int, requiredmoney : Double, accountdetails : [Account])
+{
+    for money in accountdetails
+    {
+        if requiredyourno == money.Account_Number
+        {
+            money.Account_Initial_Balance = money.Account_Initial_Balance + requiredmoney
+        }
+    }
+}
+
+//function to check availability of city
+func checkCityavailable(requiredcity : String, accountdetails : [Account]) -> Bool
+{
+    for city in accountdetails
+    {
+        if requiredcity == city.Account_Holder_City
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to print all Account Details of Customers who are from same city
+func fromSameCity(requiredcity : String, accountdetails : [Account])
+{
+    for city in accountdetails
+    {
+        if requiredcity == city.Account_Holder_City
+        {
+            print("\(city.Account_Number) | \(city.Account_Holder_Name) | \(city.Account_Holder_Id) |\(city.Account_Type) | \(city.Account_Initial_Balance) | \(city.Account_Holder_Gender)")
+        }
+    }
+}
+
+//function to check the availability of gender
+func checkGender(requiredgender : String, accountdetails : [Account]) -> Bool
+{
+    for gender in accountdetails
+    {
+        if requiredgender == gender.Account_Holder_Gender
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to print all Account Details of Customers with same gender
+func sameGender(requiredgender : String, accountdetails : [Account])
+{
+    for gender in accountdetails
+    {
+        if requiredgender == gender.Account_Holder_Gender
+        {
+            print("\(gender.Account_Number) | \(gender.Account_Holder_Name) | \(gender.Account_Holder_Id) |\(gender.Account_Type) | \(gender.Account_Initial_Balance) | \(gender.Account_Holder_City)")
+        }
+    }
+}
+
+//function to check the availability of Account Type
+func checkAccountType(requiredtype : String, accountdetails : [Account]) -> Bool
+{
+    for type in accountdetails
+    {
+        if requiredtype == type.Account_Type
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to print all Account Details of Customers who has same Account Type
+func sameAccountType(requiredtype : String, accountdetails : [Account])
+{
+    for type in accountdetails
+    {
+        if requiredtype == type.Account_Type
+        {
+            print("\(type.Account_Number) | \(type.Account_Holder_Name) | \(type.Account_Holder_Id) |\(type.Account_Holder_Gender) | \(type.Account_Initial_Balance) | \(type.Account_Holder_City)")
+        }
+    }
+}
+
+//function to check availability of Account holder id
+func checkAccountHolderId(requiredid : String, accountdetails : [Account]) -> Bool
+{
+    for id in accountdetails
+    {
+        if requiredid == id.Account_Holder_Id
+        {
+            return true
+        }
+    }
+    return false
+}
+
+//function to print all Account Details of Customers who has multiple accounts in bank
+func AccountHolderId(requiredid : String, accountdetails : [Account])
+{
+    for id in accountdetails
+    {
+        if requiredid == id.Account_Holder_Id
+        {
+            print("\(id.Account_Number) | \(id.Account_Holder_Name) | \(id.Account_Holder_Id) |\(id.Account_Type) | \(id.Account_Initial_Balance) | \(id.Account_Holder_City) | \(id.Account_Holder_Gender)")
+        }
+    }
+}
+
+//array to fill the Details of Customers
+var AccountDetails = [Account]()
+AccountDetails.append(Account(Account_Number : 111, Account_Holder_Name : "karan", Account_Holder_Id : "karanlam001" ,Account_Type : "current", Account_Initial_Balance : 100000, Account_Holder_City : "navsari", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 112, Account_Holder_Name : "vijay", Account_Holder_Id : "vijaaylam002" ,Account_Type : "savings", Account_Initial_Balance : 50200, Account_Holder_City : "ahmedabad", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 113, Account_Holder_Name : "harika", Account_Holder_Id : "harikalam003" ,Account_Type : "savings", Account_Initial_Balance : 60900, Account_Holder_City : "hyderabad", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 114, Account_Holder_Name : "sarvindh", Account_Holder_Id : "sarvindhlam004" ,Account_Type :"current", Account_Initial_Balance : 100000, Account_Holder_City : "hyderabad", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 115, Account_Holder_Name : "harsha", Account_Holder_Id : "harshalam005" ,Account_Type : "savings", Account_Initial_Balance : 61100, Account_Holder_City : "vijayawada", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 116, Account_Holder_Name : "harsha", Account_Holder_Id : "harshalam005" ,Account_Type : "current", Account_Initial_Balance : 33000, Account_Holder_City : "vijayawada", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 117, Account_Holder_Name : "pavan", Account_Holder_Id : "pavanlam006" ,Account_Type : "savings", Account_Initial_Balance : 40500, Account_Holder_City : "ahmedabad", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 118, Account_Holder_Name : "bindu", Account_Holder_Id : "bindulam007" ,Account_Type : "savings", Account_Initial_Balance : 55000, Account_Holder_City : "delhi", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 119, Account_Holder_Name : "harika", Account_Holder_Id : "harikalam003" ,Account_Type : "current", Account_Initial_Balance : 35000, Account_Holder_City : "hyderabad", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 120, Account_Holder_Name : "sunaina", Account_Holder_Id : "sunainalam008" ,Account_Type : "savings", Account_Initial_Balance : 20000, Account_Holder_City : "mumbai", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 121, Account_Holder_Name : "sunny", Account_Holder_Id : "sunnylam009" ,Account_Type : "savings", Account_Initial_Balance : 60000, Account_Holder_City : "vijayawada", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 122, Account_Holder_Name : "mallika", Account_Holder_Id : "mallikalam010" ,Account_Type : "savings", Account_Initial_Balance : 65000, Account_Holder_City : "navsari", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 123, Account_Holder_Name : "ronaldo", Account_Holder_Id : "ronaldolam011" ,Account_Type : "savings", Account_Initial_Balance : 100000, Account_Holder_City : "vadodara", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 124, Account_Holder_Name : "messi", Account_Holder_Id : "messilam012" ,Account_Type : "current", Account_Initial_Balance : 100000, Account_Holder_City : "chennai", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 125, Account_Holder_Name : "karan", Account_Holder_Id : "karanlam001" ,Account_Type : "savings", Account_Initial_Balance : 60000, Account_Holder_City : "navsari", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 126, Account_Holder_Name : "dualipa", Account_Holder_Id : "dualipalam013" ,Account_Type : "savings", Account_Initial_Balance : 70000, Account_Holder_City : "mumbai", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 127, Account_Holder_Name : "navya", Account_Holder_Id : "navyalam014" ,Account_Type : "savings", Account_Initial_Balance : 40000, Account_Holder_City : "hyderabad", Account_Holder_Gender : "Male"))
+AccountDetails.append(Account(Account_Number : 128, Account_Holder_Name : "messi", Account_Holder_Id : "messilam012" ,Account_Type : "savings", Account_Initial_Balance : 25000, Account_Holder_City : "chennai", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 129, Account_Holder_Name : "amith", Account_Holder_Id : "amithlam015" ,Account_Type : "savings", Account_Initial_Balance : 28000, Account_Holder_City : "bangalore", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 130, Account_Holder_Name : "keerthi", Account_Holder_Id : "keerthilam016" ,Account_Type : "savings", Account_Initial_Balance : 32000, Account_Holder_City : "delhi", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 131, Account_Holder_Name : "snigdha", Account_Holder_Id : "snigdhalam017" ,Account_Type : "savings", Account_Initial_Balance : 25500, Account_Holder_City : "bangalore", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 132, Account_Holder_Name : "harsha", Account_Holder_Id : "harshalam018" ,Account_Type : "savings", Account_Initial_Balance : 33200, Account_Holder_City : "surat", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 133, Account_Holder_Name : "sana", Account_Holder_Id : "sanalam019" ,Account_Type : "savings", Account_Initial_Balance : 43000, Account_Holder_City : "bangalore", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 134, Account_Holder_Name : "kovela", Account_Holder_Id : "kovelalam020" ,Account_Type : "savings", Account_Initial_Balance : 10000, Account_Holder_City : "delhi", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 135, Account_Holder_Name : "keerthi", Account_Holder_Id : "keerthilam016" ,Account_Type : "current", Account_Initial_Balance : 34000, Account_Holder_City : "delhi", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 136, Account_Holder_Name : "harika", Account_Holder_Id : "harikalam003" ,Account_Type : "current", Account_Initial_Balance : 48000, Account_Holder_City : "hyderabad", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 137, Account_Holder_Name : "chidvilas", Account_Holder_Id : "chidvilaslam021" ,Account_Type : "savings", Account_Initial_Balance : 22300, Account_Holder_City : "hyderabad", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 138, Account_Holder_Name : "yesh", Account_Holder_Id : "yeshlam022" ,Account_Type : "savings", Account_Initial_Balance : 12000, Account_Holder_City : "mumbai", Account_Holder_Gender : "male"))
+AccountDetails.append(Account(Account_Number : 139, Account_Holder_Name : "vidya", Account_Holder_Id : "vidyalam023" ,Account_Type : "current", Account_Initial_Balance : 52300, Account_Holder_City : "mumbai", Account_Holder_Gender : "female"))
+AccountDetails.append(Account(Account_Number : 140, Account_Holder_Name : "kovela", Account_Holder_Id : "kovelalam020" ,Account_Type : "current", Account_Initial_Balance : 77250, Account_Holder_City : "delhi", Account_Holder_Gender : "female"))
+
+print("*****************************\n")
+print("   Welcome To Lambton Bank   ")
+print("\n*****************************")
+var selection = 0
+var utilityselection = 0
+repeat{
+print("\n1. Create New Account\n2. Balance Enquiry\n3. Deposite Amount\n4. Withdraw Amount\n5. All account holder list\n6. Close an account\n7. Modify an account\n8. Transfer money to other accounts\n9. Pay Utility Bills\n0. Exit")
+print("\nSelect any number from given menu: ")
+selection = Int(readLine()!)!
+switch selection {
+    case 1 : 
+        print("Enter Account Number: ")
+        let account_no = Int(readLine()!)!
+        print("Enter Account Holder Name: ")
+        let account_holder_name = readLine()!
+        print("Enter Your Account Holder Id:(example : <name>lam123) ")
+        let account_holder_id = readLine()!
+        print("Enter Account Type (current/savings): ")
+        let account_type = readLine()!
+        print("Enter Initial Account Balance: (>= 500 for savings & >= 1000 for current) ")
+        let account_initial_balance = Double(readLine()!)!
+        print("Enter Account Holder City: ")
+        let account_holder_city = readLine()!
+        print("Enter Account Holder Gender: ")
+        let account_holder_gender = readLine()!
+        if(account_type == "current" && account_initial_balance >= 500)
+        {
+            AccountDetails.append(Account(Account_Number : account_no, Account_Holder_Name : account_holder_name, Account_Holder_Id : account_holder_id ,Account_Type : account_type, Account_Initial_Balance : account_initial_balance, Account_Holder_City : account_holder_city, Account_Holder_Gender : account_holder_gender))
+            print("\n*****************************")
+            print(" Account Created Succesfully ")
+            print("*****************************")
+        }
+        else if(account_type == "savings" && account_initial_balance >= 1000)
+        {
+            AccountDetails.append(Account(Account_Number : account_no, Account_Holder_Name : account_holder_name, Account_Holder_Id : account_holder_id ,Account_Type : account_type, Account_Initial_Balance : account_initial_balance, Account_Holder_City : account_holder_city, Account_Holder_Gender : account_holder_gender))
+            print("\n*****************************")
+            print(" Account Created Succesfully ")
+            print("*****************************")
+        }
+        else
+        {
+            print("\n***********************************************************")
+            print(" Invalid Account Type Or Initial Balance, Please Try Again.")
+            print("***********************************************************")
+        }
+    
+    
+    case 2 : 
+        print("Enter Your Account Number: ")
+        let accountno = Int(readLine()!)!
+        if AccountBalance(requiredno : accountno, accountdetails : AccountDetails)
+        {
+            let getbalance = getAccountBalance(requiredno : accountno, accountdetails : AccountDetails)
+            print("\n*****************************")
+            print(" Account Balance: ",getbalance)
+            print("*****************************")
+        }
+        else
+        {
+            print("\n*******************************************************")
+            print(" You Dont have an Account, Please create a new Account.")
+            print("*******************************************************")
+        }
+        
+    
+    case 3 : 
+        print("Enter Your Account Number: ")
+        let accountnodeposite = Int(readLine()!)!
+        if AccountBalance(requiredno : accountnodeposite, accountdetails : AccountDetails)
+        {
+            print("Enter Amount you Want to Deposite: ")
+            let depositeamount = Double(readLine()!)!
+            DepositeAmount(requiredno : accountnodeposite, requiredamount : depositeamount, accountdetails : AccountDetails)
+            print("\n*****************************")
+            print(" Amount Deposite Succesfully ")
+            print("*****************************")
+        }
+        else
+        {
+            print("\n*******************************************************************************************")
+            print(" you can not deposite money because you don't have an account. Please create a new Account.")
+            print("*******************************************************************************************")
+        }
+    case 4 :
+        print("Enter Your Account Number: ")
+        let accountnowithdraw = Int(readLine()!)!
+        if AccountBalance(requiredno : accountnowithdraw, accountdetails : AccountDetails)
+        {
+            print("Enter Amount you want to Withdraw: ")
+            let withdrawamount = Double(readLine()!)!
+            if checkWithdrawAmount(requiredno : accountnowithdraw, requiredamount : withdrawamount, accountdetails : AccountDetails)
+            {
+                WithdrawAmount(requiredno : accountnowithdraw, requiredamount : withdrawamount, accountdetails : AccountDetails)
+                print("\n******************************")
+                print(" Amount Withdrawn Succesfully ")
+                print("******************************")
+            }
+            else
+            {
+                print("\n************************************************************************************************")
+                print(" Withdraw Amount is more than Account Balance. You cant withdraw more than your Account Balance.")
+                print(" Your account Balance is: ",getAccountBalance(requiredno : accountnowithdraw, accountdetails : AccountDetails))
+                print("************************************************************************************************")
+            }
+            
+        }
+        else
+        {
+            print("\n******************************************************************************************************")
+            print(" you can not withdraw money because you don't have an account. Please create a new Account. Thank you.")
+            print("******************************************************************************************************")
+        }
+    case 5 : 
+        for account in AccountDetails
+        {
+            account.printDetails()
+        }
+    
+    case 6 : 
+        print("To Close Your Account, Enter Your Account Number: ")
+        let accountnoclose = Int(readLine()!)!
+        if AccountBalance(requiredno : accountnoclose, accountdetails : AccountDetails)
+        {
+            let closecount = returnCount(requiredno : accountnoclose, accountdetails : AccountDetails)
+            AccountDetails.remove(at : closecount-1)
+            print("\n****************************")
+            print(" Account Closed Succesfully ")
+            print("****************************")
+        }
+        else
+        {
+            print("\n*******************************************************")
+            print(" You Dont have an Account, Please create a new Account.")
+            print("*******************************************************")
+        }
+    
+    case 7 : 
+        print("What Would you like to change?(name/city/both): ")
+        let change = readLine()!
+        if change == "name"
+        {
+            print("Enter Your Account Number: ")
+            let newnameaccno = Int(readLine()!)!
+            if AccountBalance(requiredno : newnameaccno, accountdetails : AccountDetails)
+            {
+                print("Enter a new name for your Account: ")
+                let newname = readLine()!
+                NewName(requiredno : newnameaccno, requiredname : newname, accountdetails : AccountDetails)
+                print("\n**************************")
+                print(" Name changed Succesfully ")
+                print("**************************")
+            }
+            else
+            {
+                print("\n*******************************************************")
+                print(" You Dont have an Account, Please create a new Account.")
+                print("*******************************************************")
+            }
+                
+        }
+        
+        else if change == "city"
+        {
+            print("Enter Your Account Number: ")
+            let newcityaccno = Int(readLine()!)!
+            if AccountBalance(requiredno : newcityaccno, accountdetails : AccountDetails)
+            {
+                print("Enter a new city for your Account: ")
+                let newcity = readLine()!
+                NewCity(requiredno : newcityaccno, requiredname : newcity, accountdetails : AccountDetails)
+                print("\n**************************")
+                print(" city changed Succesfully ")
+                print("**************************")
+            }
+            else
+            {
+                print("\n*******************************************************")
+                print(" You Dont have an Account, Please create a new Account.")
+                print("*******************************************************")
+            }
+        }
+        
+        else if change == "both"
+        {
+            print("Enter Your Account Number: ")
+            let newbothaccno = Int(readLine()!)!
+            if AccountBalance(requiredno : newbothaccno, accountdetails : AccountDetails)
+            {
+                print("Enter a new name for your Account: ")
+                let newbothname = readLine()!
+                NewName(requiredno : newbothaccno, requiredname : newbothname, accountdetails : AccountDetails)
+                print("Enter a new city for your Account: ")
+                let newbothcity = readLine()!
+                NewCity(requiredno : newbothaccno, requiredname : newbothcity, accountdetails : AccountDetails)
+                print("\n****************************************")
+                print(" Name And City both changed Succesfully ")
+                print("****************************************")
+            }
+            else
+            {
+                print("\n*******************************************************")
+                print(" You Dont have an Account, Please create a new Account.")
+                print("*******************************************************")
+            }
+        }
+        else
+        {
+            print("\n**************************************************")
+            print(" Wrong Input! Please select from the given option.")
+            print("**************************************************")
+        }
+    
+    case 8 : 
+        print("Enter your Account Number: ")
+        let transferyouraccno = Int(readLine()!)!
+        print("Enter Account Number in which you want to transfer the money: ")
+        let transferotheraccno = Int(readLine()!)!
+        print("Enter the amount of money you want to transfer: ")
+        let transfermoney = Double(readLine()!)!
+        if AccountBalance(requiredno : transferyouraccno, accountdetails : AccountDetails)
+        {
+            if checkWithdrawAmount(requiredno : transferyouraccno, requiredamount : transfermoney, accountdetails : AccountDetails)
+            {
+                if AccountBalance(requiredno : transferotheraccno, accountdetails : AccountDetails)
+                {
+                    TransferMoneyyour(requiredyourno : transferyouraccno, requiredmoney : transfermoney, accountdetails : AccountDetails)
+                    TransferMoneyother(requiredyourno : transferotheraccno, requiredmoney : transfermoney, accountdetails : AccountDetails)
+                    print("\n******************************")
+                    print(" Money transfered Succesfully ")
+                    print("******************************")
+                }
+                else
+                {
+                    print("\n********************************************")
+                    print(" No Account available for transfering money.")
+                    print("********************************************")
+                }
+            }
+            else
+            {
+                print("\n****************************************")
+                print(" You dont have enough money to transfer.")
+                print(" Your Account Balance is: ",getAccountBalance(requiredno : transferyouraccno, accountdetails : AccountDetails))
+                print("****************************************")
+            }
+        }
+        else
+        {
+            print("\n*******************************************************")
+            print(" You Dont have an Account, Please create a new Account.")
+            print("*******************************************************")
+        }
+    
+    case 9 : 
+        repeat
+        {
+            print("\n...Pay Utility Bills...")
+            print("\n1. Phone Bill\n2. Electricity Bill\n3. Water Bill\n0. Exit")
+            print("Choose any number from menu: ")
+            utilityselection = Int(readLine()!)!
+            
+            switch utilityselection {
+                case 1 : 
+                
+                    print("Enter Your Account Number: ")
+                    let phnebillaccno = Int(readLine()!)!
+                    print("Enter the Amount of Phone Bill: ")
+                    let phnebill = Double(readLine()!)!
+                    if AccountBalance(requiredno : phnebillaccno, accountdetails : AccountDetails)
+                    {
+                        if checkWithdrawAmount(requiredno : phnebillaccno, requiredamount : phnebill, accountdetails : AccountDetails)
+                        {
+                            WithdrawAmount(requiredno : phnebillaccno, requiredamount : phnebill, accountdetails : AccountDetails)
+                            print("\n*****************************")
+                            print(" Phone Bill Paid Succesfully ")
+                            print("*****************************")
+                        }
+                        else
+                        {
+                            print("\n************************************************************************")
+                            print(" Enterd Bill amount is more than current balance, you cant pay the bill.")
+                            print(" Your Account Balance is: ",getAccountBalance(requiredno : phnebillaccno, accountdetails : AccountDetails))
+                            print("************************************************************************")
+                        }
+                    }
+                    else
+                    {
+                        print("\n*************************************************************************************")
+                        print(" You cant pay the bill because you dont have an account. Please Create a new account.")
+                        print("*************************************************************************************")
+                    }
+                    
+                case 2 :
+                
+                    print("Enter Your Account Number: ")
+                    let electricitybillaccno = Int(readLine()!)!
+                    print("Enter the Amount of electricity Bill: ")
+                    let electricitybill = Double(readLine()!)!
+                    if AccountBalance(requiredno : electricitybillaccno, accountdetails : AccountDetails)
+                    {
+                        if checkWithdrawAmount(requiredno : electricitybillaccno, requiredamount : electricitybill, accountdetails : AccountDetails)
+                        {
+                            WithdrawAmount(requiredno : electricitybillaccno, requiredamount : electricitybill, accountdetails : AccountDetails)
+                            print("\n***********************************")
+                            print(" Electricity Bill Paid Succesfully ")
+                            print("***********************************")
+                        }
+                        else
+                        {
+                            print("\n************************************************************************")
+                            print(" Enterd Bill amount is more than current balance, you cant pay the bill.")
+                            print(" Your Account Balance is: ",getAccountBalance(requiredno : electricitybillaccno, accountdetails : AccountDetails))
+                            print("************************************************************************")
+                            
+                        }
+                    }
+                    else
+                    {
+                        print("\n*************************************************************************************")
+                        print(" You cant pay the bill because you dont have an account. Please Create a new account.")
+                        print("*************************************************************************************")
+                    }
+                case 3 : 
+                
+                    print("Enter Your Account Number: ")
+                    let waterbillaccno = Int(readLine()!)!
+                    print("Enter the Amount of Water Bill: ")
+                    let waterbill = Double(readLine()!)!
+                    if AccountBalance(requiredno : waterbillaccno, accountdetails : AccountDetails)
+                    {
+                        if checkWithdrawAmount(requiredno : waterbillaccno, requiredamount : waterbill, accountdetails : AccountDetails)
+                        {
+                            WithdrawAmount(requiredno : waterbillaccno, requiredamount : waterbill, accountdetails : AccountDetails)
+                            print("\n*****************************")
+                            print(" Water Bill Paid Succesfully ")
+                            print("*****************************")
+                        }
+                        else
+                        {
+                            print("\n************************************************************************")
+                            print(" Enterd Bill amount is more than current balance, you cant pay the bill.")
+                            print(" Your Account Balance is: ",getAccountBalance(requiredno : waterbillaccno, accountdetails : AccountDetails))
+                            print("************************************************************************")
+                        }
+                    }
+                    else
+                    {
+                        print("\n*************************************************************************************")
+                        print(" You cant pay the bill because you dont have an account. Please Create a new account.")
+                        print("*************************************************************************************")
+                    }
+                    
+                case 0 :
+                    print("\n*******************")
+                    print(" Exit to main menu.")
+                    print("*******************")
+                    
+                default :
+                    print("\n********************************************************")
+                    print(" Invalid Choice! Please select correct option from menu.")
+                    print("********************************************************")
+            }
+        }while utilityselection != 0
+    
+    
+    case 0 : 
+        print("\n********")
+        print("  Exit  ")
+        print("********")
+    
+    
+    default : 
+        print("\n********************************************************")
+        print(" Invalid Choice! Please select correct option from menu.")
+        print("********************************************************")
+    }
+}while selection != 0
+
+var selectno = 0
+repeat{
+    print("\n1. Find Details of Customer From Same City.\n2. Find the account details of particular gender.\n3. Find the account details for same type of Bank accounts.\n4. Find how many accounts you have in the Bank.\n0.Exit")
+    print("\nChoose any number from given menu: ")
+    selectno = Int(readLine()!)!
+    
+    switch selectno {
+     
+        case 1:
+            print("Enter the name of the city: ")
+            let cityname = readLine()!
+            if checkCityavailable(requiredcity : cityname, accountdetails : AccountDetails)
+            {
+                print("\n*****************************")
+                print("Customers From \(cityname): \n")
+                fromSameCity(requiredcity : cityname, accountdetails : AccountDetails)
+                print("*****************************")
+            }
+            else
+            {
+                print("\n****************************************")
+                print(" No Customer available from \(cityname) ")
+                print("****************************************")
+            }
+            
+        case 2:
+            print("Enter the gender u want to find details of: (male/female): ")
+            let findgender = readLine()!
+            if checkGender(requiredgender : findgender, accountdetails : AccountDetails)
+            {
+                print("\n****************************************")
+                print("Details of all \(findgender) accounts: \n")
+                sameGender(requiredgender : findgender, accountdetails : AccountDetails)
+                print("****************************************")
+            }
+            else
+            {
+                print("\n*******************************************")
+                print(" Wrong entry! please enter gender properly.")
+                print("*******************************************")
+            }
+        case 3:
+            print("Enter the Account Type: (current/savings)")
+            let accountstype = readLine()!
+            if checkAccountType(requiredtype : accountstype, accountdetails : AccountDetails)
+            {
+                print("\n******************************************")
+                print("Details of all \(accountstype) accounts: \n")
+                sameAccountType(requiredtype : accountstype, accountdetails : AccountDetails)
+                print("******************************************")
+            }
+            else
+            {
+                print("\n**********************")
+                print(" Invalid Account Type.")
+                print("**********************")
+            }
+        case 4:
+            print("Enter Account Holder Id: ")
+            let custid = readLine()!
+            if checkAccountHolderId(requiredid : custid, accountdetails : AccountDetails)
+            {
+                print("\n***********************************")
+                print("All Details of accounts You have: \n")
+                AccountHolderId(requiredid : custid, accountdetails : AccountDetails)
+                print("***********************************")
+            }
+            else
+            {
+                print("\n********************************************")
+                print(" No Account found on this Account Holder Id.")
+                print("********************************************")
+            }
+            
+        case 0:
+            print("\n********")
+            print("  Exit  ")
+            print("********")
+        default:
+            print("\n***********************************************************")
+            print(" Invalid selection. please Select correct option from menu.")
+            print("***********************************************************")
+    }
+    
+}while selectno != 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
